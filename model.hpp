@@ -39,6 +39,12 @@ public:
     std::string toString()  {
         return "[W:" + std::to_string(width) + ",H: " + std::to_string(height) + "]";
     }
+    friend SIZE  operator+(const SIZE &a, const SIZE&b){
+	    return SIZE(a.width+b.width,a.height+b.height);
+    }
+    friend SIZE  operator-(const SIZE &a, const SIZE&b){
+	    return SIZE(a.width-b.width,a.height-b.height);
+    }
 };
 
 class POS {
@@ -78,9 +84,14 @@ public:
         X+=p.X;
         Y+=p.Y;
     }
-
     std::string toString()  {
         return "[X:" + std::to_string(X) + ",Y: " + std::to_string(Y) + "]";
+    }
+    friend POS  operator+(const POS &a, const POS&b){
+	    return POS(a.X+b.X,a.Y+b.Y);
+    }
+    friend POS  operator-(const POS &a, const POS&b){
+	    return POS(a.X-b.X,a.Y-b.Y);
     }
 };
 
@@ -161,4 +172,19 @@ public :
 
 };
 
+class Rectangle:
+    public BaseObj {
+public :
+	// I not resolving problem class with no costructor
+    Rectangle():BaseObj() {}
+    Rectangle(const int x, const int y, const int w=0, const int h=0):
+	    BaseObj(x,y,w,h) {}
+     //		    
+    virtual std::string toString() {
+        std::stringstream ss;
+        ss<<"class Rectangle : X="<<pos.X<<",Y="<<pos.Y<<",W="<<size.width<<",H="<<
+          size.height<<std::endl;
+        return ss.str();
+    }
+};
 
