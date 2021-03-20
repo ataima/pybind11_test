@@ -23,7 +23,8 @@ pybind11::class_<POS>(m,"POS",pybind11::dynamic_attr())
 .def(pybind11::self +=  pybind11::self)
 .def(pybind11::self -=  pybind11::self)
 .def("fromSIZE",&POS::fromSize)
-.def("move",&POS::move)
+.def("move",pybind11::overload_cast<const int,const int>(&POS::move))
+.def("move",pybind11::overload_cast<const POS &>(&POS::move))
 .def("toString",&POS::toString);	
 
 pybind11::class_<BaseObj>(m, "BaseObj",pybind11::dynamic_attr() )
@@ -33,7 +34,8 @@ pybind11::class_<BaseObj>(m, "BaseObj",pybind11::dynamic_attr() )
 .def ( "getPos" , &BaseObj::getPos )
 .def ( "setSize" , &BaseObj::setSize )
 .def ( "toString", &BaseObj::toString )
-.def ( "move", &BaseObj::move )
+.def("move",pybind11::overload_cast<const int,const int>(&BaseObj::move))
+.def("move",pybind11::overload_cast<const POS &>(&BaseObj::move))
 .def("inflate",&BaseObj::inflate)
 .def ( "setPos" , &BaseObj::setPos );
 

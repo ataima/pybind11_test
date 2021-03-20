@@ -16,6 +16,19 @@ print(s1.toString())
 s2=b.getSize()
 print(s2.toString())
 
+
+pos1=a.getPos();
+b.setPos(pos1)
+print (a.toString(),b.toString())
+
+b.move(100,100)
+print (b.toString())
+
+b.move(pos1)
+print (b.toString())
+
+
+
 #error
 s3=s1+s2
 
